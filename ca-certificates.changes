@@ -1,3 +1,6 @@
+* Fri Oct 07 2016 Eugenio "g7" Paolantonio <me@medesimo.eu> - 2016.2.10-2
+- [security] Updated ca-certificates to 2016.2.10.
+
 * Wed Aug 26 2015 Pasi Sjöholm <pasi.sjoholm@jollamobile.com> - 2014.2.1-2
 - Remove perl from BuildRequires. MER#1271
 

@@ -201,8 +201,8 @@ cp %{SOURCE10} %{name}/update-ca-trust.8.txt
 #xsltproc --nonet -o %{name}/update-ca-trust.8 /usr/share/asciidoc/docbook-xsl/manpage.xsl %{name}/update-ca-trust.8.xml
 
 cp %{SOURCE9} %{name}/ca-legacy.8.txt
-asciidoc.py -v -d manpage -b docbook %{name}/ca-legacy.8.txt
-xsltproc --nonet -o %{name}/ca-legacy.8 /usr/share/asciidoc/docbook-xsl/manpage.xsl %{name}/ca-legacy.8.xml
+#asciidoc.py -v -d manpage -b docbook %{name}/ca-legacy.8.txt
+#xsltproc --nonet -o %{name}/ca-legacy.8 /usr/share/asciidoc/docbook-xsl/manpage.xsl %{name}/ca-legacy.8.xml
 
 
 %install
@@ -264,17 +264,18 @@ touch $RPM_BUILD_ROOT%{catrustdir}/extracted/openssl/%{trusted_all_bundle}
 touch $RPM_BUILD_ROOT%{catrustdir}/extracted/%{java_bundle}
 
 # /etc/ssl/certs symlink for 3rd-party tools
-sln ../pki/tls/certs \
-    $RPM_BUILD_ROOT%{_sysconfdir}/ssl/certs
+ln -s ../pki/tls/certs \
+      $RPM_BUILD_ROOT%{_sysconfdir}/ssl/certs
 # legacy filenames
-sln %{catrustdir}/extracted/pem/tls-ca-bundle.pem \
-    $RPM_BUILD_ROOT%{pkidir}/tls/cert.pem
-sln %{catrustdir}/extracted/pem/tls-ca-bundle.pem \
-    $RPM_BUILD_ROOT%{pkidir}/tls/certs/%{classic_tls_bundle}
-sln %{catrustdir}/extracted/openssl/%{trusted_all_bundle} \
-    $RPM_BUILD_ROOT%{pkidir}/tls/certs/%{trusted_all_bundle}
-sln %{catrustdir}/extracted/%{java_bundle} \
-    $RPM_BUILD_ROOT%{pkidir}/%{java_bundle}
+ln -s %{catrustdir}/extracted/pem/tls-ca-bundle.pem \
+      $RPM_BUILD_ROOT%{pkidir}/tls/cert.pem
+ln -s %{catrustdir}/extracted/pem/tls-ca-bundle.pem \
+      $RPM_BUILD_ROOT%{pkidir}/tls/certs/%{classic_tls_bundle}
+ln -s %{catrustdir}/extracted/openssl/%{trusted_all_bundle} \
+      $RPM_BUILD_ROOT%{pkidir}/tls/certs/%{trusted_all_bundle}
+ln -s %{catrustdir}/extracted/%{java_bundle} \
+      $RPM_BUILD_ROOT%{pkidir}/%{java_bundle}
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
